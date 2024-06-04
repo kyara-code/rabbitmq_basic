@@ -1,0 +1,34 @@
+services:
+  rabbitmq:
+    image: rabbitmq:3-management
+    container_name: rabbitmq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      RABBITMQ_DEFAULT_USER: guest
+      RABBITMQ_DEFAULT_PASS: guest
+
+  professor:
+    build:
+      context: ./professor
+      dockerfile: Dockerfile
+    container_name: professor
+    ports:
+      - '3000:3000'
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672'
+
+  student:
+    build:
+      context: ./student
+      dockerfile: Dockerfile
+    container_name: student
+    ports:
+      - '3001:3000'
+    depends_on:
+      - rabbitmq
+    environment:
+      RABBITMQ_URL: 'amqp://guest:guest@rabbitmq:5672'
