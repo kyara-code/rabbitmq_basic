@@ -9,7 +9,7 @@ import { RabbitMQService } from './rabbit-mq.service';
         transport: Transport.RMQ,
         options: {
           urls: [
-            'amqp://localhost:5672',
+            'amqp://guest:guest@localhost:5672',
           ],
           queue: 'rabbit-mq-nest-js',
         },

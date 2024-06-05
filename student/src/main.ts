@@ -7,12 +7,10 @@ async function bootstrap() {
     transport: Transport.RMQ,
     options: {
       urls: [
-        'amqp://localhost:5672'
+        'amqp://guest:guest@localhost:5672'
       ],
       queue: 'rabbit-mq-nest-js',
-      // false = manual acknowledgement; true = automatic acknowledgment
       noAck: false,
-      // Get one by one
       prefetchCount: 1
     }
   });
